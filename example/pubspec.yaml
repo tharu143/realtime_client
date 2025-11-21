@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  realtime_client:
+  flutter_realtime_client:
     path: ../
   uuid: ^4.2.1
   intl: ^0.18.1

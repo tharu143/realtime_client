@@ -4,14 +4,14 @@
 
 ```yaml
 dependencies:
-  realtime_client:
-    path: ./realtime_client
+  flutter_realtime_client:
+    path: ./flutter_realtime_client
 ```
 
 ## Basic Setup
 
 ```dart
-import 'package:realtime_client/realtime_client.dart';
+import 'package:flutter_realtime_client/flutter_realtime_client.dart';
 
 final client = RealtimeClient(
   config: RealtimeConfig(

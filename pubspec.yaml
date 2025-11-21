@@ -1,4 +1,4 @@
-name: realtime_client
+name: flutter_realtime_client
 description: A production-ready Flutter/Dart realtime client library with robust connection management, persistence, ordered delivery, typing indicators, presence, and read receipts.
 version: 0.1.0
 homepage: https://github.com/tharu143/realtime_client

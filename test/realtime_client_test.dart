@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:realtime_client/realtime_client.dart';
+import 'package:flutter_realtime_client/flutter_realtime_client.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {

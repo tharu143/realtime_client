@@ -138,7 +138,7 @@
 - ✅ How to run locally with Node.js
 
 ### 16. Output Format ✓
-- ✅ Complete file list for `realtime_client` repo
+- ✅ Complete file list for `flutter_realtime_client` repo
 - ✅ Folders: `lib/`, `lib/src/`, `example/`, `example/lib/`, `test/`, `server-example/`
 - ✅ Full source code for each file
 - ✅ `pubspec.yaml` with tested dependency versions
@@ -201,9 +201,9 @@
 ## 📁 Complete File Structure
 
 ```
-realtime_client/
+flutter_realtime_client/
 ├── lib/
-│   ├── realtime_client.dart          # Main export file
+│   ├── flutter_realtime_client.dart          # Main export file
 │   └── src/
 │       ├── client.dart                # Main RealtimeClient class
 │       ├── config.dart                # Configuration
@@ -221,7 +221,7 @@ realtime_client/
 │   │   └── main.dart                  # Demo app
 │   └── pubspec.yaml
 ├── test/
-│   └── realtime_client_test.dart     # Unit tests
+│   └── flutter_realtime_client_test.dart     # Unit tests
 ├── server-example/
 │   ├── package.json
 │   ├── socketio-server.js            # Socket.IO server
@@ -237,7 +237,7 @@ realtime_client/
 
 ### Run Tests
 ```bash
-cd realtime_client
+cd flutter_realtime_client
 flutter test
 ```
 

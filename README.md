@@ -73,14 +73,14 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  realtime_client:
-    path: ./path/to/realtime_client
+  flutter_realtime_client:
+    path: ./path/to/flutter_realtime_client
 ```
 
 ### Basic Usage
 
 ```dart
-import 'package:realtime_client/realtime_client.dart';
+import 'package:flutter_realtime_client/flutter_realtime_client.dart';
 
 // Initialize client
 final client = RealtimeClient(
@@ -382,7 +382,7 @@ final config = RealtimeConfig(
 Run unit tests:
 
 ```bash
-cd realtime_client
+cd flutter_realtime_client
 flutter test
 ```
 

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:realtime_client/realtime_client.dart' as rt;
+import 'package:flutter_realtime_client/flutter_realtime_client.dart' as rt;
 import 'package:logger/logger.dart';
 import 'package:intl/intl.dart';
 
