@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:realtime_client/realtime_client.dart';
+import 'package:realtime_client/realtime_client.dart' as rt;
+import 'package:logger/logger.dart';
 import 'package:intl/intl.dart';
 
 void main() {
@@ -31,27 +32,27 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
-  late RealtimeClient _client;
+  late rt.RealtimeClient _client;
   final TextEditingController _textController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  final List<RealtimeMessage> _messages = [];
+  final List<rt.RealtimeMessage> _messages = [];
 
   String _serverUrl = 'http://localhost:3000'; // Default to Socket.IO
 
   // Stats
   int _pendingCount = 0;
-  ConnectionState _connectionState = ConnectionState.disconnected;
-  RealtimeMetrics _metrics = const RealtimeMetrics();
+  rt.ConnectionState _connectionState = rt.ConnectionState.disconnected;
+  rt.RealtimeMetrics _metrics = const rt.RealtimeMetrics();
 
   // Presence
-  Map<String, PresenceInfo> _presence = {};
+  Map<String, rt.PresenceInfo> _presence = {};
 
   // Typing
-  Map<String, TypingIndicator> _typing = {};
+  Map<String, rt.TypingIndicator> _typing = {};
   Timer? _typingTimer;
 
   // Read receipts
-  Map<String, List<ReadReceipt>> _receipts = {};
+  Map<String, List<rt.ReadReceipt>> _receipts = {};
 
   // Subscriptions
   final List<StreamSubscription> _subscriptions = [];
@@ -63,15 +64,15 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   }
 
   Future<void> _initClient() async {
-    final config = RealtimeConfig(
+    final config = rt.RealtimeConfig(
       url: _serverUrl,
-      deliveryStrategy: DeliveryStrategy.atLeastOnce,
+      deliveryStrategy: rt.DeliveryStrategy.atLeastOnce,
       logLevel: Level.debug,
     );
 
-    _client = RealtimeClient(
+    _client = rt.RealtimeClient(
       config: config,
-      queueStorage: SqliteQueueStorage(),
+      queueStorage: rt.SqliteQueueStorage(),
       clientId: 'demo-user-flutter',
     );
 
@@ -84,7 +85,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 
     // Messages
     _subscriptions.add(_client.onMessage.listen((msg) {
-      if (msg.type == MessageType.event && msg.event == 'chat.message') {
+      if (msg.type == rt.MessageType.event && msg.event == 'chat.message') {
         setState(() {
           _messages.add(msg);
         });
@@ -131,7 +132,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     await _client.connect();
 
     // Set presence to online
-    await _client.updatePresence(PresenceStatus.online, metadata: {
+    await _client.updatePresence(rt.PresenceStatus.online, metadata: {
       'device': 'Flutter Demo',
     });
 
@@ -169,7 +170,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     };
 
     // Optimistic update
-    final msg = RealtimeMessage.event(
+    final msg = rt.RealtimeMessage.event(
       event: 'chat.message',
       payload: payload,
       clientId: _client.clientId,
@@ -190,7 +191,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   void _onTextChanged(String text) {
     if (text.isNotEmpty) {
       // Send typing indicator
-      _client.sendTypingIndicator(isTyping: true);
+      _client.sendrt.TypingIndicator(isTyping: true);
 
       // Reset timer
       _typingTimer?.cancel();
@@ -199,7 +200,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   }
 
   void _stopTyping() {
-    _client.sendTypingIndicator(isTyping: false);
+    _client.sendrt.TypingIndicator(isTyping: false);
     _typingTimer?.cancel();
   }
 
@@ -243,11 +244,11 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             onPressed: _showSettings,
           ),
           IconButton(
-            icon: Icon(_connectionState == ConnectionState.connected
+            icon: Icon(_connectionState == rt.ConnectionState.connected
                 ? Icons.cloud_off
                 : Icons.cloud_queue),
             onPressed: () {
-              if (_connectionState == ConnectionState.connected) {
+              if (_connectionState == rt.ConnectionState.connected) {
                 _client.disconnect();
               } else {
                 _client.connect();
@@ -294,7 +295,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                 // Get read receipts for this message
                 final receipts = msg.idempotencyKey != null
                     ? _receipts[msg.idempotencyKey!] ?? []
-                    : <ReadReceipt>[];
+                    : <rt.ReadReceipt>[];
 
                 return Align(
                   alignment:
@@ -302,7 +303,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                   child: GestureDetector(
                     onLongPress: () {
                       if (!isMe && msg.idempotencyKey != null) {
-                        _client.sendReadReceipt(msg.idempotencyKey!);
+                        _client.sendrt.ReadReceipt(msg.idempotencyKey!);
                       }
                     },
                     child: Container(
@@ -469,7 +470,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                   return ListTile(
                     leading: Icon(
                       Icons.circle,
-                      color: info.status == PresenceStatus.online
+                      color: info.status == rt.PresenceStatus.online
                           ? Colors.green
                           : Colors.grey,
                       size: 12,
