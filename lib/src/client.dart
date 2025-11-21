@@ -65,7 +65,7 @@ class RealtimeClient {
 
   // Connectivity
   final Connectivity _connectivity = Connectivity();
-  StreamSubscription<ConnectivityResult>? _connectivitySubscription;
+  StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
 
   RealtimeClient({
     required this.config,
@@ -81,9 +81,9 @@ class RealtimeClient {
   void _init() {
     // Listen to connectivity changes
     _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen((result) {
-      // If result is not none, we have connection
-      final hasConnection = result != ConnectivityResult.none;
+        _connectivity.onConnectivityChanged.listen((results) {
+      // If any result is not none, we have connection
+      final hasConnection = results.any((r) => r != ConnectivityResult.none);
       if (hasConnection &&
           _connectionStateController.value == ConnectionState.disconnected &&
           !_manuallyClosed) {
