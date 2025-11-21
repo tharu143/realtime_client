@@ -1,0 +1,15 @@
+{
+    "name": "realtime-server-example",
+    "version": "1.0.0",
+    "description": "Minimal server example for realtime_client",
+    "main": "socketio-server.js",
+    "scripts": {
+        "start:io": "node socketio-server.js",
+        "start:ws": "node ws-server.js"
+    },
+    "dependencies": {
+        "socket.io": "^4.7.2",
+        "ws": "^8.14.2",
+        "uuid": "^9.0.1"
+    }
+}
