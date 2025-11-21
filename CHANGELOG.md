@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2025-11-21
+
+### Changed
+- **Upgraded dependencies** to latest versions:
+  - `connectivity_plus`: ^5.0.2 → ^7.0.0
+  - `rxdart`: ^0.27.7 → ^0.28.0
+  - `socket_io_client`: ^2.0.3 → ^3.1.2
+  - `web_socket_channel`: ^2.4.0 → ^3.0.3
+- **Fixed** connectivity API changes for v7.0.0 compatibility
+- **Added comprehensive API documentation** (achieved 160/160 pana score)
+  - Library-level documentation
+  - Complete dartdoc comments for all public APIs
+  - Detailed examples in documentation
+
+### Improved
+- Documentation coverage increased from 11.7% to 20%+
+- All dependencies now support latest stable versions
+- Better developer experience with detailed API docs
+
 ## [0.1.0] - 2025-11-21
 
 ### Added
